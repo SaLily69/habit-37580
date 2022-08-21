@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2022_08_15_080331) do
   create_table "goals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "theme", null: false
     t.string "purpose", null: false
-    t.time "target_total_time"
+    t.integer "target_total_time", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

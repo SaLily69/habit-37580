@@ -54,7 +54,7 @@ https://docs.google.com/spreadsheets/d/1JmMHp4AKZS0pABaFhIKfzqvzVe4ynDSpw9zkMYNN
 | -------------------- | ---------- | ------------------------------ |
 | theme                | string     | null: false                    |
 | purpose              | string     | null: false                    |
-| target_total_time    | time       |                                |
+| target_total_time    | integer    | null: false                    |
 | user_id              | references | null: false ,foreign_key: true |
 
 #### Association
@@ -65,9 +65,10 @@ https://docs.google.com/spreadsheets/d/1JmMHp4AKZS0pABaFhIKfzqvzVe4ynDSpw9zkMYNN
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
 | study_day        | data       | null: false                    |
-| start_time       | time       | null: false                    |
-| finish_time      | time       | null: false                    |
-| total_time       | time       | null: false                    |
+| study_hour       | integer    | null: false                    |
+| study_minute     | integer    | null: false                    |
+| total_hours      | integer    | null: false                    |
+| total_minutes    | integer    | null: false                    |
 | task             | text       |                                |
 | feed_back        | integer    | null: false                    |
 | time_remind      | datetime   | null: false                    |
