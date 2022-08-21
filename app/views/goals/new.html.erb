@@ -1,0 +1,11 @@
+<div class="contents row">
+  <div class="container">
+    <h3>学習目標を設定します</h3>
+    <%= form_with(model: @goal, local: true) do |form| %>
+      <%= form.text_field :theme, placeholder: "学習する科目を書きましょう" %>
+      <%= form.text_field :purpose, placeholder: "目標を達成したらどうなりたいか書きましょう" %>
+      
+      <%= form.submit "決定する" %>
+    <% end %>
+  </div>
+</div>
