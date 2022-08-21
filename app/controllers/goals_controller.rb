@@ -8,7 +8,17 @@ class GoalsController < ApplicationController
   end
 
   def create
-    Goal.create(goal_params)
+    @goal = Goal.new(goal_params)
+    if @goal.save
+      redirect_to root_path
+    else
+      render :new
+    end
+  end
+
+  private
+  def goal_params
+    params.require(:goal).permit(:theme, :purpose, :target_total_time).merge(user_id: current_user.id)
   end
 
 end
