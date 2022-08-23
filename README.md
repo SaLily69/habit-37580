@@ -58,7 +58,7 @@ https://docs.google.com/spreadsheets/d/1JmMHp4AKZS0pABaFhIKfzqvzVe4ynDSpw9zkMYNN
 | user_id              | references | null: false ,foreign_key: true |
 
 #### Association
-- belongs_to :goal
+- belongs_to :user
 - has_many :logs
 
 ### Logsテーブル
