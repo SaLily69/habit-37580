@@ -15,10 +15,10 @@
         <h1 class="grid-6"><a href="/">Habit</a></h1>
         <% if user_signed_in? %>
           <div class="user_nav grid-6">
-            <span><%= current_user.nickname %>
+            <span><%= current_user.nickname %>さん
               <ul class="user__info">
                 <li>
-                  <%= link_to "マイページ", new_goal_path %>
+                  <%= link_to "マイページ", edit_goal_path(@goal) %>
                   <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
                 </li>
               </ul>
