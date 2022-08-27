@@ -1,4 +1,6 @@
-<p><%= @goal.theme %> を学習しています。</p>
-<p>目標の【<%= @goal.purpose %> 】を目指して頑張りましょう！</p>
-<p>目標学習時間：<%= @goal.target_total_time%>時間</p>
-<p>次回の学習予定:<p>
+<% if Goal.exists?%>
+  <p><%= @goal.theme %> を学習しています。</p>
+  <p>目標の【<%= @goal.purpose %> 】を目指して頑張りましょう！</p>
+  <p>目標学習時間：<%= @goal.target_total_time%>時間</p>
+  <p>次回の学習予定:<p>
+<% end %>

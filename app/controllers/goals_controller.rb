@@ -1,8 +1,11 @@
 class GoalsController < ApplicationController
   #before_action :move_to_new
-  before_action :set_goal, only:[:index, :edit]
+  before_action :set_goal, only:[:edit]
 
   def index
+    if Goal.exists?
+      set_goal
+    end
   end
 
   def new
