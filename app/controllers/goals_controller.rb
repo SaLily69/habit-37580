@@ -2,9 +2,6 @@ class GoalsController < ApplicationController
   #before_action :move_to_new
   before_action :set_goal, only:[:index, :edit]
 
-  def index
-  end
-
   def new
     @goal = Goal.new
   end
@@ -18,6 +15,9 @@ class GoalsController < ApplicationController
     end
   end
 
+  def index
+  end
+
   def edit
   end
 
@@ -27,7 +27,9 @@ class GoalsController < ApplicationController
   end
 
   def set_goal
-    @goal = Goal.find(current_user.id)
+    if Goal.exists? && user_signed_in?
+      @goal = Goal.find(current_user.id)
+    end
   end
 
   #追加実装、目標を設定しなければtoppageに遷移できない
