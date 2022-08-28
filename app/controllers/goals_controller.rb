@@ -2,8 +2,6 @@ class GoalsController < ApplicationController
   #before_action :move_to_new
   before_action :set_goal, only:[:index, :edit]
 
-  
-
   def new
     @goal = Goal.new
   end
