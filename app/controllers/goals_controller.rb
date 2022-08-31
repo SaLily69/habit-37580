@@ -21,6 +21,16 @@ class GoalsController < ApplicationController
   def edit
   end
 
+  def update
+    goal = Goal.find(current_user.id)
+    if goal.update(goal_params)
+      redirect_to root_path
+    else
+      @goal = goal
+      render :edit
+    end
+  end
+
   private
   def goal_params
     params.require(:goal).permit(:theme, :purpose, :target_total_time).merge(user_id: current_user.id)
