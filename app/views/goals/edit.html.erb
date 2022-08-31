@@ -10,5 +10,6 @@
       <%= f.text_field :target_total_time, placeholder: "目標の総時間数を入力しましょう（単位：時間）" %>
       <%= f.submit "決定する" %>
     <% end %>
+    <%= link_to '目標の削除', goal_path(@goal.id), method: :delete %>
   </div>
 </div>
