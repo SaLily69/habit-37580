@@ -1,4 +1,5 @@
 class GoalsController < ApplicationController
+  before_action :authenticate_user!
   #before_action :move_to_new
   before_action :set_goal, only:[:edit, :destroy]
 
@@ -18,6 +19,8 @@ class GoalsController < ApplicationController
   def index
     if Goal.exists?(user_id: current_user.id) && user_signed_in?
       @goal = Goal.find_by(user_id: current_user.id)
+    else
+
     end
   end
 
