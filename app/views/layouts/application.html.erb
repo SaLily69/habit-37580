@@ -13,13 +13,24 @@
     <header class="header">
       <div class="header__bar row">
         <h1 class="grid-6"><a href="/">Habit</a></h1>
-        <% if user_signed_in? %>
+        <% if Goal.exists?(user_id: current_user.id) && user_signed_in?  %>
           <div class="user_nav grid-6">
             <span><%= current_user.nickname %>さん
               <ul class="user__info">
                 <li>
-                  <%= link_to "目標の設定", edit_goal_path(Goal.find(current_user.id)) %>
+                  <%= link_to "目標の設定", edit_goal_path(Goal.find_by(user_id: current_user.id)) %>
                   <%= link_to "学習を開始", root_path %>
+                </li>
+              </ul>
+            </span>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete ,class: "post"%>
+          </div>
+        <% elsif user_signed_in? %>
+          <div class="user_nav grid-6">
+            <span><%= current_user.nickname %>さん
+              <ul class="user__info">
+                <li>
+                  <%= link_to "目標の設定", new_goal_path %>
                 </li>
               </ul>
             </span>
