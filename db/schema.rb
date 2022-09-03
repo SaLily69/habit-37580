@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_15_080331) do
+ActiveRecord::Schema.define(version: 2022_09_03_042408) do
 
   create_table "goals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "theme", null: false
@@ -20,6 +20,19 @@ ActiveRecord::Schema.define(version: 2022_08_15_080331) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_goals_on_user_id"
+  end
+
+  create_table "logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.date "study_day", null: false
+    t.integer "study_hour", null: false
+    t.integer "study_minute", null: false
+    t.text "task"
+    t.integer "feed_back", null: false
+    t.datetime "time_remind", null: false
+    t.bigint "goal_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["goal_id"], name: "index_logs_on_goal_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -36,4 +49,5 @@ ActiveRecord::Schema.define(version: 2022_08_15_080331) do
   end
 
   add_foreign_key "goals", "users"
+  add_foreign_key "logs", "goals"
 end

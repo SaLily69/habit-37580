@@ -67,12 +67,10 @@ https://docs.google.com/spreadsheets/d/1JmMHp4AKZS0pABaFhIKfzqvzVe4ynDSpw9zkMYNN
 | study_day        | data       | null: false                    |
 | study_hour       | integer    | null: false                    |
 | study_minute     | integer    | null: false                    |
-| total_hours      | integer    | null: false                    |
-| total_minutes    | integer    | null: false                    |
 | task             | text       |                                |
 | feed_back        | integer    | null: false                    |
 | time_remind      | datetime   | null: false                    |
-| goal_id          | references | null: false ,foreign_key: true |
+| goal             | references | null: false ,foreign_key: true |
 
 #### Association
 - belongs_to :goal
