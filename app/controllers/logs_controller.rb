@@ -1,11 +1,12 @@
 class LogsController < ApplicationController
 
-  def new
-    @log = Log.new
-  end
-
   def create
-    Log.create(log_params)
+    @log = Log.new(log_params)
+    if @log.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   private
