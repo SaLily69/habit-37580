@@ -28,7 +28,7 @@ class GoalsController < ApplicationController
   end
 
   def update
-    goal = Goal.find(current_user.id)
+    goal = Goal.find_by(user_id: current_user.id)
     if goal.update(goal_params)
       redirect_to root_path
     else

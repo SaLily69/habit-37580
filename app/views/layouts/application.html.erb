@@ -20,8 +20,9 @@
                 <ul class="user__info">
                   <li>
                     <%= link_to "目標の設定", edit_goal_path(Goal.find_by(user_id: current_user.id)) %>
-                    <%= link_to "学習を開始", goal_logs_path(params[:goal_id]) %>
+                    <%= link_to "学習を開始", goal_logs_path(@goal) %>
 <%#トップページから記録ページへの遷移はできるが、逆の時はエラー。@goal, トップページはこれがないとNG 原因？？%>
+<%#引数@goalなら学習log保存ok%>
                   </li>
                 </ul>
               </span>
