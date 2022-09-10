@@ -1,6 +1,7 @@
 <% if Goal.exists?(user_id: current_user.id) && user_signed_in? %>
-  <p><%= @goal.theme %> を学習しています。</p>
-  <p>目標の【<%= @goal.purpose %> 】を目指して頑張りましょう！</p>
-  <p>目標学習時間：<%= @goal.target_total_time%>時間</p>
-  <p>次回の学習予定:<p>
+  <p>学習テーマ：<%= @goal.theme %></p>
+  <p>目標は【<%= @goal.purpose %> 】です。</p>
+  <p>学習時間【<%= @goal.target_total_time %>時間】達成を目指して頑張りましょう！</p>
+  <p>現在の合計学習時間：<%= @study_hour %>時間<%= @study_minute %>分 達成率<%#%>％</p>
+  <p>次回の学習予定:<%= @log.time_remind %><p>
 <% end %>

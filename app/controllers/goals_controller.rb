@@ -19,6 +19,14 @@ class GoalsController < ApplicationController
   def index
     if Goal.exists?(user_id: current_user.id) && user_signed_in?
       @goal = Goal.find_by(user_id: current_user.id)
+      @logs = Log.where(goal_id: @goal.id)
+      #@log = Log.order(updated_at: :desc).limit(1) 最新のログから表示するよう修正
+      @log = Log.find_by(goal_id: @goal.id)
+      study_hour = Log.where(goal_id: @goal.id).pluck(:study_hour)
+      @study_hour = study_hour.sum
+      study_minute = Log.where(goal_id: @goal.id).pluck(:study_minute)
+      @study_minute = study_minute.sum
+      #minuteが60以上になった時を追加修正
     else
 
     end
@@ -57,6 +65,11 @@ class GoalsController < ApplicationController
       redirect_to root_path
     end
   end
+
+  #def sum_time
+    #study_hour = Log.where(goal_id: @goal.id).pluck(:study_hour)
+    #study_minute = Log.where(goal_id: @goal.id).pluck(:study_minute)
+  #end
 
   #追加実装、目標を設定しなければtoppageに遷移できない
   #def move_to_new

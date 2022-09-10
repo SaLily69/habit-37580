@@ -2,7 +2,7 @@ Log page
 <div class="contents row">
   <div class="container">
     <h3>学習の記録をしましょう</h3>
-    <%= form_with(model: @log, url: goal_logs_path, local: true) do |f| %>
+    <%= form_with(model: [@goal,@log], url: goal_logs_path, local: true) do |f| %>
       <P>学習日</P>
       <%= f.date_select :study_day %>
       <P>学習時間</P>
