@@ -20,8 +20,9 @@ class GoalsController < ApplicationController
     if Goal.exists?(user_id: current_user.id) && user_signed_in?
       @goal = Goal.find_by(user_id: current_user.id)
       @logs = Log.where(goal_id: @goal.id)
-      #@log = Log.order(updated_at: :desc).limit(1) 最新のログから表示するよう修正
+      #@log = Log.limit(1).order("created_at DESC")
       @log = Log.find_by(goal_id: @goal.id)
+      #@logには最新のものだけ入れる
       study_hour = Log.where(goal_id: @goal.id).pluck(:study_hour)
       @study_hour = study_hour.sum
       study_minute = Log.where(goal_id: @goal.id).pluck(:study_minute)

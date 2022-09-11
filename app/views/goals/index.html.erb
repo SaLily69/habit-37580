@@ -4,4 +4,12 @@
   <p>学習時間【<%= @goal.target_total_time %>時間】達成を目指して頑張りましょう！</p>
   <p>現在の合計学習時間：<%= @study_hour %>時間<%= @study_minute %>分 達成率<%#%>％</p>
   <p>次回の学習予定:<%= @log.time_remind %><p>
+  <div class="contents row">
+    <% @logs.each do |log| %>
+      <div class="container">
+        <%= log.study_day %><%= log.study_hour %>時間<%= log.study_minute %>分
+        ▷詳細<%#= link_to '詳細', # , method: :get %>
+      </div>
+    <% end %>
+  </div>
 <% end %>
