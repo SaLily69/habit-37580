@@ -13,6 +13,10 @@ class LogsController < ApplicationController
     end
   end
 
+  def show
+    @logs = Log.where(goal_id: @goal.id).order("created_at DESC")
+  end
+
   private
 
   def log_params
