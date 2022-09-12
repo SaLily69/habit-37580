@@ -8,8 +8,8 @@
     <% @logs.each do |log| %>
       <div class="container">
         <%= log.study_day %>：<%= log.study_hour %>時間<%= log.study_minute %>分
-        <%= link_to '▷詳細', url: goal_log_path(log.id,log.id) %>
-        <%#リンク要修正、各ページとべない%>
+        <%= link_to '▷詳細', goal_log_path(@goal,@logs) %>
+        <%#@log,@logsの中身整理コントローラー、リンクでlogのid渡せてない%>
       </div>
     <% end %>
   </div>

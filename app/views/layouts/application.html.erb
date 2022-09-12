@@ -21,7 +21,7 @@
                   <li>
                     <%= link_to "目標の設定", edit_goal_path(Goal.find_by(user_id: current_user.id)) %>
                     <%= link_to "学習を開始", goal_logs_path(@goal) %>
-<%#トップページから記録ページへの遷移:params[:goal_id],学習記録の時にgoal_idが取れてないのが原因、ひとまず@goalで保存%>
+                    <%#学習記録保存からの遷移はOK params[:goal_id]/@goal%>
                   </li>
                 </ul>
               </span>
