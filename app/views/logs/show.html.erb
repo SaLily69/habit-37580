@@ -5,5 +5,6 @@ Show Page
     <p>学習時間：<%= @log.study_hour %>時間<%= @log.study_minute %>分</p>
     <p>学習メモ<%= @log.task %></p>
     <p>自己評価:<%= @log.feed_back %><p>
+    <%= link_to '学習記録の削除', goal_log_path(@goal,@log), method: :delete %>
   </div>
 </div>
