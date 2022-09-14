@@ -19,7 +19,7 @@ class GoalsController < ApplicationController
   def index
     if Goal.exists?(user_id: current_user.id) && user_signed_in?
       @goal = Goal.find_by(user_id: current_user.id)
-      @logs = Log.where(goal_id: @goal.id)
+      @logs = Log.where(goal_id: @goal.id).order("created_at DESC")
       #@log = Log.limit(1).order("created_at DESC")
       @log = Log.find_by(goal_id: @goal.id)
       #@logには最新のものだけ入れる
@@ -61,7 +61,7 @@ class GoalsController < ApplicationController
 
   def set_goal
     if Goal.exists?(user_id: current_user.id) && user_signed_in?
-      @goal = Goal.find(params[:id])
+      @goal = Goal.find_by(user_id: current_user.id)
     else
       redirect_to root_path
     end
