@@ -21,7 +21,7 @@ class GoalsController < ApplicationController
       @goal = Goal.find_by(user_id: current_user.id)
       @logs = Log.where(goal_id: @goal.id).order("created_at DESC")
       #@log = Log.limit(1).order("created_at DESC")
-      @log = Log.find_by(goal_id: @goal.id)
+      #@log = Log.find_by(goal_id: @goal.id)
       #@logには最新のものだけ入れる
       study_hour = Log.where(goal_id: @goal.id).pluck(:study_hour)
       @study_hour = study_hour.sum
