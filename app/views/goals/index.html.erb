@@ -3,13 +3,12 @@
   <p>目標は【<%= @goal.purpose %> 】です。</p>
   <p>学習時間【<%= @goal.target_total_time %>時間】達成を目指して頑張りましょう！</p>
   <p>現在の合計学習時間：<%= @study_hour %>時間<%= @study_minute %>分 達成率<%#%>％</p>
-  <p>次回の学習予定:<%= @log.time_remind %><p>
+  <p>次回の学習予定:<%#@log.time_remind %><p>
   <div class="contents row">
     <% @logs.each do |log| %>
       <div class="container">
         <%= log.study_day %>：<%= log.study_hour %>時間<%= log.study_minute %>分
-        <%= link_to '▷詳細', goal_log_path(@goal,@logs) %>
-        <%#@log,@logsの中身整理コントローラー、リンクでlogのid渡せてない%>
+        <%= link_to '▷詳細', goal_log_path(@goal,log) %>
       </div>
     <% end %>
   </div>
