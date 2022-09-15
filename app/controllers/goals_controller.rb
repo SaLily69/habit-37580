@@ -20,16 +20,8 @@ class GoalsController < ApplicationController
     if Goal.exists?(user_id: current_user.id) && user_signed_in?
       @goal = Goal.find_by(user_id: current_user.id)
       @logs = Log.where(goal_id: @goal.id).order("created_at DESC")
-      #@log = Log.limit(1).order("created_at DESC")
-      #@log = Log.find_by(goal_id: @goal.id)
-      #@logには最新のものだけ入れる
-      study_hour = Log.where(goal_id: @goal.id).pluck(:study_hour)
-      @study_hour = study_hour.sum
-      study_minute = Log.where(goal_id: @goal.id).pluck(:study_minute)
-      @study_minute = study_minute.sum
-      #minuteが60以上になった時を追加修正
-    else
-
+      @log = Log.where(goal_id: @goal.id).last
+      calc_time
     end
   end
 
@@ -67,10 +59,21 @@ class GoalsController < ApplicationController
     end
   end
 
-  #def sum_time
-    #study_hour = Log.where(goal_id: @goal.id).pluck(:study_hour)
-    #study_minute = Log.where(goal_id: @goal.id).pluck(:study_minute)
-  #end
+  def calc_time
+    study_hour = Log.where(goal_id: @goal.id).pluck(:study_hour)
+    study_minute = Log.where(goal_id: @goal.id).pluck(:study_minute)
+    study_hour_total = study_hour.sum
+    study_minute_total = study_minute.sum
+    if study_minute_total >= 60
+      carry_up_hour = study_minute_total / 60
+      study_hour_total += carry_up_hour
+      @study_hour_total = study_hour_total
+      @study_minute_total = study_minute_total % 60
+    else
+      @study_hour_total = study_hour_total
+      @study_minute_total = study_minute_total
+    end
+  end
 
   #追加実装、目標を設定しなければtoppageに遷移できない
   #def move_to_new
