@@ -6,8 +6,8 @@
   <% if Log.exists?(goal_id: @goal.id) %>
     <p>次回の学習予定:<%= @log.time_remind %><p>
     <% @logs.each do |log| %>
-      <%= log.study_day %>：<%= log.study_hour %>時間<%= log.study_minute %>分
-      <%= link_to '▷詳細', goal_log_path(@goal,log), class: "btn btn-outline-secondary" %>
+      <p><%= log.study_day %>：<%= log.study_hour %>時間<%= log.study_minute %>分
+      <%= link_to '▷詳細', goal_log_path(@goal,log), class: "btn btn-outline-secondary" %></p>
     <% end %>
   <% end %>
 <% end %>
