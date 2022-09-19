@@ -42,7 +42,7 @@ class GoalsController < ApplicationController
     if @goal.destroy
       redirect_to root_path
     else
-      redirect_to root_path
+      redirect_to edit_goal_path
     end
   end
 
