@@ -1,5 +1,4 @@
-<div class="contents row">
-  <div class="container">
+
     <h3>学習目標を設定します</h3>
     <%= form_with(model: @goal, local: true) do |f| %>
       <p>学習テーマを決めましょう</p>
@@ -10,5 +9,3 @@
       <%= f.text_field :purpose, placeholder: "例）アプリケーションが作れるようになる" %>
       <%= f.submit "決定する" %>
     <% end %>
-  </div>
-</div>

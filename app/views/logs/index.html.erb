@@ -1,5 +1,4 @@
-<div class="contents row">
-  <div class="container">
+
     <h3>学習の記録をしましょう</h3>
     <%= form_with(model: [@goal,@log], url: goal_logs_path, id: "goal_id", local: true) do |f| %>
       <P>学習日</P>
@@ -15,5 +14,3 @@
       <%= f.datetime_field :time_remind %>
       <%= f.submit "記録する" %>
     <% end %>
-  </div>
-</div>
