@@ -70,7 +70,6 @@ RSpec.describe Log, type: :model do
         @log.study_hour = '0'
         @log.study_minute = '0'
         @log.valid?
-        binding.pry
         expect(@log.errors.full_messages).to include "Study minute must be greater than or equal to 1"
       end
       #it '学習予定に過去の日時は入力できない' do
