@@ -18,11 +18,17 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include "Email can't be blank"
     end
-    #it 'nicknameが16文字以上では登録できない' do
-    #end
+    it 'nicknameが16文字以上では登録できない' do
+      @user.nickname = 'abcdefghijklmnop'
+      @user.valid?
+      expect(@user.errors.full_messages).to include "Nickname is too long (maximum is 15 characters)"
+    end
     #it '重複したnicknameが存在する場合は登録できない' do
     #end
-    #it 'emailは@を含まないと登録できない' do
-    #end
+    it 'emailは@を含まないと登録できない' do
+      @user.email = 'testmail'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Email is invalid')
+    end
   end
 end
