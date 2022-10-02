@@ -1,8 +1,12 @@
 <% if Goal.exists?(user_id: current_user.id) && user_signed_in? %>
   <p>学習テーマ：<%= @goal.theme %></p>
   <p>目標は【<%= @goal.purpose %> 】です。</p>
-  <p>学習時間【<%= @goal.target_total_time %>時間】達成を目指して頑張りましょう！</p>
-  <p>現在の合計学習時間：<%= @study_hour_total %>時間<%= @study_minute_total %>分 達成率<%#%>％</p>
+  <p>学習時間【<span id='target_time'><%= @goal.target_total_time %></span>時間】達成を目指して頑張りましょう！</p>
+  <p>現在の合計学習時間：
+    <span id='total_hour'><%= @study_hour_total %></span>時間
+    <span id='total_minute'><%= @study_minute_total %></span>分
+    達成率<span id='achievment_rate'><%#%></span>％
+  </p>
   <% if Log.exists?(goal_id: @goal.id) %>
     <p>次回の学習予定:<%= @log.time_remind %><p>
     <% @logs.each do |log| %>
