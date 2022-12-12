@@ -9,7 +9,7 @@
     <p>現在の合計学習時間：
       <span id='total_hour'><%= @study_hour_total %></span>時間
       <span id='total_minute'><%= @study_minute_total %></span>分
-      達成率<span id='achievment_rate'>0</span>％
+      達成率<span id='achievment_rate'></span>％
     </p>
       <% if Log.exists?(goal_id: @goal.id) %>
       <p>次回の学習予定:<%= @log.time_remind %><p>
