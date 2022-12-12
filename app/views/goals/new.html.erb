@@ -1,0 +1,11 @@
+
+    <h3>学習目標を設定します</h3>
+    <%= form_with(model: @goal, local: true) do |f| %>
+      <p>学習テーマを決めましょう</p>
+      <%= f.text_field :theme, placeholder: "例）プログラミング" %>
+      <p>目標学習時間を設定しましょう</p>
+      <%= f.text_field :target_total_time, placeholder: "例）10（単位：時間）" %>
+      <p>目標を達成したらどうなりたいか書きましょう</p>
+      <%= f.text_field :purpose, placeholder: "例）アプリケーションが作れるようになる" %>
+      <%= f.submit "決定する" %>
+    <% end %>

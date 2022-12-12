@@ -1,0 +1,6 @@
+
+    <p>学習日：<%= @log.study_day %></p>
+    <p>学習時間：<%= @log.study_hour %>時間<%= @log.study_minute %>分</p>
+    <p>学習メモ：<%= @log.task %></p>
+    <p>自己評価:<%= @log.feed_back %><p>
+    <%= button_to '学習記録の削除', goal_log_path(@goal,@log), class: "btn btn-secondary btn-sm", :method => :delete %>

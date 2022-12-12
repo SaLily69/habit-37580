@@ -1,0 +1,15 @@
+current directory: /Users/DIVX/project_apli/habit-37580/vendor/cache/ruby/2.6.0/gems/bootsnap-1.12.0/ext/bootsnap
+/Users/DIVX/.rbenv/versions/2.6.5/bin/ruby -I /Users/DIVX/.rbenv/versions/2.6.5/lib/ruby/2.6.0 -r ./siteconf20221206-73494-h3lugl.rb extconf.rb
+creating Makefile
+
+current directory: /Users/DIVX/project_apli/habit-37580/vendor/cache/ruby/2.6.0/gems/bootsnap-1.12.0/ext/bootsnap
+make "DESTDIR=" clean
+
+current directory: /Users/DIVX/project_apli/habit-37580/vendor/cache/ruby/2.6.0/gems/bootsnap-1.12.0/ext/bootsnap
+make "DESTDIR="
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/DIVX/project_apli/habit-37580/vendor/cache/ruby/2.6.0/gems/bootsnap-1.12.0/ext/bootsnap
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20221206-73494-tsn4l1/bootsnap

@@ -1,0 +1,16 @@
+
+    <h3>学習の記録をしましょう</h3>
+    <%= form_with(model: [@goal,@log], url: goal_logs_path, id: "goal_id", local: true) do |f| %>
+      <P>学習日</P>
+      <%= f.date_select :study_day %>
+      <P>学習時間</P>
+      <%= f.number_field :study_hour, min: 0, max: 23 %>時間
+      <%= f.number_field :study_minute, min: 0, max: 59 %>分
+      <P>学習メモ</P>
+      <%= f.text_area :task, placeholder: "" %>
+      <P>自己評価(５段階)</P>
+      <%= f.number_field :feed_back, min: 1, max: 5  %>
+      <P>次の学習予定</P>
+      <%= f.datetime_field :time_remind %>
+      <%= f.submit "記録する" %>
+    <% end %>
