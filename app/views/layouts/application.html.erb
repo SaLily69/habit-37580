@@ -28,7 +28,7 @@
                   <a ><%= link_to "学習を開始", goal_logs_path(@goal), class: "nav-link" %></a>
                 </li>
                 <li class="nav-item">
-                  <a><%= link_to "ログアウト", destroy_user_session_path, class: "nav-link", method: :delete %></a>
+                  <a><%= link_to "ログアウト", destroy_user_session_path, class: "btn", method: :delete %></a>
                 </li>
               </ul>
           <% else %>
@@ -40,7 +40,7 @@
                   <a><%= link_to "目標の設定", new_goal_path, class: "nav-link" %></a>
                 </li>
                 <li class="nav-item">
-                  <a><%= link_to "ログアウト", destroy_user_session_path, class: "nav-link", method: :delete %></a>
+                  <a><%= link_to "ログアウト", destroy_user_session_path, class: "btn", method: :delete %></a>
                 </li>
               </ul>
           <% end %>
