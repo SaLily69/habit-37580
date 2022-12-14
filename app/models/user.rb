@@ -6,6 +6,6 @@ class User < ApplicationRecord
   
   has_one :goal
 
-  validates :nickname, presence: true, uniqueness: true, length: { maximum: 15 }
+  validates :nickname, presence: true, uniqueness: { case_sensitive: true }, length: { maximum: 15 }
 
 end
