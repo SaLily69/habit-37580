@@ -55,6 +55,10 @@ class GoalsController < ApplicationController
   def set_goal
     if Goal.exists?(user_id: current_user.id) && user_signed_in?
       @goal = Goal.find_by(user_id: current_user.id)
+      @logs = Log.where(goal_id: @goal.id).order("created_at DESC")
+      @log = Log.where(goal_id: @goal.id).last
+      calc_time
+      calc_achievment
     else
       redirect_to root_path
     end
