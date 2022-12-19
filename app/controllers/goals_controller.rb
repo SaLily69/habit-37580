@@ -22,7 +22,7 @@ class GoalsController < ApplicationController
       @logs = Log.where(goal_id: @goal.id).order("created_at DESC")
       @log = Log.where(goal_id: @goal.id).last
       calc_time
-      calc_achievment
+      
     end
   end
 
@@ -80,27 +80,6 @@ class GoalsController < ApplicationController
     end
   end
 
-  def calc_achievment
-    if Log.exists?(goal_id: @goal.id)
-      study_hour = Log.where(goal_id: @goal.id).pluck(:study_hour)
-      study_minute = Log.where(goal_id: @goal.id).pluck(:study_minute)
-      study_hour_sum = study_hour.sum
-      study_minute = Log.where(goal_id: @goal.id).pluck(:study_minute)
-      study_minute_total = study_minute.sum
-      study_hour_total = study_hour_sum * 60 + study_minute_total
-    
-      goal_time = @goal.target_total_time
-      goal_time_sum = goal_time * 60 
-
-      achievment_rate = sprintf("%.2f",study_hour_total / goal_time_sum.to_f)
-      a, b = achievment_rate.to_s.split(".")
-      achievment_rate_i = b.to_i
-      @achievment_rate = achievment_rate_i
-    else
-      achievment_rate = 0
-      @achievment_rate = achievment_rate
-    end
-  end
 
   #追加実装、目標を設定しなければtoppageに遷移できない
   #def move_to_new

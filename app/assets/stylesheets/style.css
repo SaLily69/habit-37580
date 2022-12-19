@@ -41,13 +41,17 @@ li {
 /**top-content 学習目標*********************************/
 .top-content{
   height: 200px;
-  background-color: aqua;
+  background-color: #ffffff;
   margin: 0 100px;
   display: flex;
 }
 
 .top-left{
-  width: 40%;
+  width: 30%;
+}
+
+.top-mid{
+
 }
 
 .top-right{
