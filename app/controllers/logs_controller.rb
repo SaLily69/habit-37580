@@ -9,7 +9,7 @@ class LogsController < ApplicationController
   def create
     @log = Log.new(log_params)
     if @log.save
-      redirect_to root_path
+      redirect_to goals_path
     else
       render :index
     end

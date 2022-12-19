@@ -5,14 +5,31 @@
     <p>目標は【<%= @goal.purpose %> 】です。</p>
     <p>学習時間【<span id='target_time'><%= @goal.target_total_time %></span>時間】達成を目指して頑張りましょう！</p>
   </div>
-  <div class="top-right">
+  <div class="top-mid">
     <p>現在の合計学習時間：
       <span id='total_hour'><%= @study_hour_total %></span>時間
       <span id='total_minute'><%= @study_minute_total %></span>分
-      達成率<span id='achievment_rate'></span>％
+      達成率<span id='achievment_rate'><%= @achievment_rate %></span>％
     </p>
       <% if Log.exists?(goal_id: @goal.id) %>
       <p>次回の学習予定:<%= @log.time_remind %><p>
+  </div>
+  <div class="top-right">
+    <canvas id="achievment_graph" width="300" height="200"></canvas>
+    <script>
+      const ctx = document.getElementById("achievment_graph")
+      const achievment_graph = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels:['達成率','目標達成まで残り'],
+          datasets:[{
+            label: '達成率',
+            backgroundColor: ['#00ffff','#f0ffff'],
+            data: [5, 95],
+          }]
+        },
+      })
+    </script>
   </div>
 </div>
 
