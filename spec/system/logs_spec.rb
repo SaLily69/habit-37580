@@ -4,7 +4,8 @@ RSpec.describe '学習記録の投稿', type: :system do
   before do
     @user = FactoryBot.create(:user)
     @goal = FactoryBot.create(:goal)
-    @log = FactoryBot.create(:log)
+    @log  = FactoryBot.create(:log, goal: @goal)
+    @logs = @log
   end
 
   context '学習記録が投稿できるとき' do
@@ -39,25 +40,21 @@ RSpec.describe '学習記録の投稿', type: :system do
     #学習記録ページに遷移する
     visit goal_logs_path(@goal.id)
     #フォームに情報を入力する
-    select '2022',from: 'log_study_day_1i'
-    select 'December',from: 'log_study_day_2i'
-    select '15', from: 'log_study_day_3i'
     fill_in 'log_study_hour', with: @log.study_hour
     fill_in 'log_study_minute', with: @log.study_minute
     fill_in 'log_task', with: @log.task
     fill_in 'log_feed_back', with: @log.feed_back
     fill_in 'log_time_remind', with: @log.time_remind
-    #Logモデルのバリデーションに成功している
-    expect(@log).to be_valid
-    binding.pry
     #送信するとLogモデルのカウントが1上がることを確認する
     expect{
       find('input[name="commit"]').click
     }.to change {Log.count}.by(1)
-    binding.pry
-
     #トップページに遷移することを確認する
     expect(current_path).to eq(goals_path)
+    binding.pry
+    end
+
+    it '学習記録を投稿した時'do
     #トップページに学習記録があることを確認する
     expect(page).to have_content(@log.study_hour)
     #トップページに学習時間の総計があることを確認する
