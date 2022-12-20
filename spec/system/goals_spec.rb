@@ -35,19 +35,5 @@ RSpec.describe '学習目標の一覧ページ', type: :system do
       expect(page).to have_content(@goal.target_total_time)
       expect(page).to have_content(@goal.purpose)
     end
-
-    let(:goal)  { create(:goal)}
-    let(:log)   { create(:log)}
-    it '学習記録が投稿されている時'do
-      #トップページを表示する
-      visit root_path
-      fill_in 'Email', with: @user.email
-      fill_in 'Password', with: @user.password
-      find('input[name="commit"]').click
-      expect(current_path).to eq(root_path)
-      #この記述だとまたgoalもlogもない状態から
-      binding.pry
-      expect(page).to have_content('達成率')
-    end
   end
 end

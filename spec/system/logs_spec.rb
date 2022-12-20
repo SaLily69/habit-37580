@@ -3,37 +3,19 @@ require 'rails_helper'
 RSpec.describe '学習記録の投稿', type: :system do
   before do
     @user = FactoryBot.create(:user)
-    @goal = FactoryBot.create(:goal)
+    @goal = FactoryBot.create(:goal, user: @user)
     @log  = FactoryBot.create(:log, goal: @goal)
     @logs = @log
   end
 
   context '学習記録が投稿できるとき' do
     it 'ログインしたユーザーは学習記録を投稿できる' do
-    #ログインする
+    #既に登録データがある状態でログインする
     visit new_user_session_path
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: @user.password
     find('input[name="commit"]').click
     expect(current_path).to eq(root_path)
-    #目標の設定ボタンがあることを確認する
-    expect(page).to have_content('目標の設定')
-    #目標設定ページに移動する
-    visit new_goal_path
-    #フォームに情報を入力する
-    fill_in 'goal_theme', with: @goal.theme
-    fill_in 'goal_target_total_time', with: @goal.target_total_time
-    fill_in 'goal_purpose', with: @goal.purpose
-    #送信するとGoalモデルのカウントが1上がることを確認する
-    expect{
-      find('input[name="commit"]').click
-    }.to change {Goal.count}.by(1)
-    #トップページに遷移することを確認する
-    expect(current_path).to eq(root_path)
-    #トップページに設定した目標があることを確認する
-    expect(page).to have_content(@goal.theme)
-    expect(page).to have_content(@goal.target_total_time)
-    expect(page).to have_content(@goal.purpose)
 
     #学習を開始のボタンがあることを確認する
     expect(page).to have_content('学習を開始')
@@ -49,18 +31,19 @@ RSpec.describe '学習記録の投稿', type: :system do
     expect{
       find('input[name="commit"]').click
     }.to change {Log.count}.by(1)
+
     #トップページに遷移することを確認する
     expect(current_path).to eq(goals_path)
-    binding.pry
-    end
-
-    it '学習記録を投稿した時'do
     #トップページに学習記録があることを確認する
-    expect(page).to have_content(@log.study_hour)
-    #トップページに学習時間の総計があることを確認する
-    #expect(page).to have_content(@study_hour_total)
+    expect(page).to have_content('メモ')
+    #トップページに次回の学習予定があることを確認する
+    expect(page).to have_content('次回の学習予定')
+    #トップページに学習合計時間（時間数）があることを確認する
+    expect(page).to have_content @achievment_rate
+    #トップページに学習合計時間（分数）があることを確認する
+    expect(page).to have_content @total_hour
     #トップページに学習の進捗率があることを確認する
-    #expect(page).to have_content(@achievment_rate)
+    expect(page).to have_content @total_minute
     end
   end
 end
