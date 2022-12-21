@@ -22,8 +22,8 @@ class GoalsController < ApplicationController
       @logs = Log.where(goal_id: @goal.id).order("created_at DESC")
       @log = Log.where(goal_id: @goal.id).last
       calc_time
-      calc_achievment
-      graph
+      @achievment_rate = calc_achievment(@goal)
+      gon.graph_data = graph(@achievment_rate)
     end
   end
 
@@ -49,6 +49,7 @@ class GoalsController < ApplicationController
   end
 
   private
+
   def goal_params
     params.require(:goal).permit(:theme, :purpose, :target_total_time).merge(user_id: current_user.id)
   end
@@ -81,7 +82,7 @@ class GoalsController < ApplicationController
     end
   end
 
-  def calc_achievment
+  def calc_achievment(goal)
     if Log.exists?(goal_id: @goal.id)
       study_hour = Log.where(goal_id: @goal.id).pluck(:study_hour)
       study_minute = Log.where(goal_id: @goal.id).pluck(:study_minute)
@@ -95,19 +96,19 @@ class GoalsController < ApplicationController
 
       achievment_rate = sprintf("%.2f",study_hour_total / goal_time_sum.to_f)
       a, b = achievment_rate.to_s.split(".")
-      achievment_rate_i = b.to_i
-      @achievment_rate = achievment_rate_i
+      achievment_rate= b.to_i
+      return achievment_rate 
     else
       achievment_rate = 0
-      @achievment_rate = achievment_rate
+      return achievment_rate
     end
   end
 
-  def graph
+  def graph(achievment_rate)
     achievment_rate = @achievment_rate
     time_required = 100 - achievment_rate
     graph_data = [achievment_rate , time_required]
-    gon.graph_data = graph_data
+    return graph_data
   end
 
 
