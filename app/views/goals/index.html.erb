@@ -16,20 +16,6 @@
   </div>
   <div class="top-right">
     <canvas id="achievment_graph" width="300" height="200"></canvas>
-    <script>
-      const ctx = document.getElementById("achievment_graph")
-      const achievment_graph = new Chart(ctx, {
-        type: 'pie',
-        data: {
-          labels:['達成率','目標達成まで残り'],
-          datasets:[{
-            label: '達成率',
-            backgroundColor: ['#00ffff','#f0ffff'],
-            data: gon.graph_data,
-          }]
-        },
-      })
-    </script>
   </div>
 </div>
 
