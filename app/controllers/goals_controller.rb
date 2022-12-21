@@ -23,6 +23,7 @@ class GoalsController < ApplicationController
       @log = Log.where(goal_id: @goal.id).last
       calc_time
       calc_achievment
+      graph
     end
   end
 
@@ -100,6 +101,13 @@ class GoalsController < ApplicationController
       achievment_rate = 0
       @achievment_rate = achievment_rate
     end
+  end
+
+  def graph
+    achievment_rate = @achievment_rate
+    time_required = 100 - achievment_rate
+    graph_data = [achievment_rate , time_required]
+    gon.graph_data = graph_data
   end
 
 
