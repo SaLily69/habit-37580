@@ -44,6 +44,8 @@ RSpec.describe '学習記録の投稿', type: :system do
     expect(page).to have_content @total_hour
     #トップページに学習の進捗率があることを確認する
     expect(page).to have_content @total_minute
+    #トップページに学習進捗率を示すグラフがあることを確認する
+    #javascriptをテストするには別途gem(capybara-webkit)インストール必要
     end
   end
 end

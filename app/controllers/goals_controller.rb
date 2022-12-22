@@ -96,11 +96,9 @@ class GoalsController < ApplicationController
 
       achievment_rate = sprintf("%.2f",study_hour_total / goal_time_sum.to_f)
       a, b = achievment_rate.to_s.split(".")
-      achievment_rate= b.to_i
-      return achievment_rate 
+      achievment_rate= b.to_i 
     else
       achievment_rate = 0
-      return achievment_rate
     end
   end
 
@@ -108,7 +106,6 @@ class GoalsController < ApplicationController
     achievment_rate = @achievment_rate
     time_required = 100 - achievment_rate
     graph_data = [achievment_rate , time_required]
-    return graph_data
   end
 
 
