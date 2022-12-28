@@ -19,7 +19,7 @@ class GoalsController < ApplicationController
   def index
     if Goal.exists?(user_id: current_user.id) && user_signed_in?
       @goal = Goal.find_by(user_id: current_user.id)
-      @logs = Log.where(goal_id: @goal.id).order("created_at DESC")
+      @logs = Log.where(goal_id: @goal.id).order("study_day DESC")
       @log = Log.where(goal_id: @goal.id).last
       calc_time
       @achievment_rate = calc_achievment(@goal)
@@ -60,7 +60,7 @@ class GoalsController < ApplicationController
       @logs = Log.where(goal_id: @goal.id).order("created_at DESC")
       @log = Log.where(goal_id: @goal.id).last
       calc_time
-      calc_achievment
+      @achievment_rate = calc_achievment(@goal)
     else
       redirect_to root_path
     end
@@ -82,7 +82,7 @@ class GoalsController < ApplicationController
     end
   end
 
-  def calc_achievment(goal)
+  def calc_achievment(rate)
     if Log.exists?(goal_id: @goal.id)
       study_hour = Log.where(goal_id: @goal.id).pluck(:study_hour)
       study_minute = Log.where(goal_id: @goal.id).pluck(:study_minute)

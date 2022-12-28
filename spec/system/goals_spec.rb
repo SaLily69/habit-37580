@@ -16,6 +16,7 @@ RSpec.describe '学習目標の一覧ページ', type: :system do
       fill_in 'Password', with: @user.password
       find('input[name="commit"]').click
       expect(current_path).to eq(root_path)
+      
       #目標の設定ボタンがあることを確認する
       expect(page).to have_content('目標の設定')
       #目標設定ページに移動する

@@ -22,17 +22,45 @@ header {
 }
 
 .heading{
-  width: 60%;
-  margin-left: 30px;
+  width: 50%;
+  margin-left: 100px;
+  padding: 3px 0px;
+}
+
+.heading a {
+  text-decoration: none;
+  color: #000000;
+  font-size: 30px;
 }
 
 .navbar-list{
   display: flex;
+  padding: 12px 0px;
 }
 
 .nav-item{
-  margin-right: 10px;
+  margin: 5px 15px 0px 0px;
 }
+
+.nav-item a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.nav-item-button{
+  margin-right: 10px;
+  background-color: #FFFFFF;
+  width: 80px;
+  height: 20px;
+  padding: 3px;
+  border-radius: 5px;
+}
+.nav-item-button a {
+  text-decoration: none;
+  color: #2f4f4f;
+  font-size: 15px;
+}
+
 
 li {
   list-style: none;
@@ -40,9 +68,9 @@ li {
 
 /**top-content 学習目標*********************************/
 .top-content{
-  height: 200px;
+  height: 230px;
   background-color: #ffffff;
-  margin: 0 100px;
+  margin: 20px 100px;
   display: flex;
 }
 
@@ -51,11 +79,12 @@ li {
 }
 
 .top-mid{
-
+  width: 25%;
+  margin-left: 60px;
 }
 
 .top-right{
-
+  width: 30%;
 }
 
 /**log-content 学習記録*********************************/

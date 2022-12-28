@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe '学習記録の投稿', type: :system do
   before do
     @user = FactoryBot.create(:user)
-    @goal = FactoryBot.create(:goal, user: @user)
-    @log  = FactoryBot.create(:log, goal: @goal)
-    @logs = @log
+    @goal = FactoryBot.create(:goal ,user: @user)
+    @log  = FactoryBot.create(:log)
+    @logs = create_list(:log, 3, goal: @goal)
   end
 
   context '学習記録が投稿できるとき' do
@@ -16,6 +16,11 @@ RSpec.describe '学習記録の投稿', type: :system do
     fill_in 'Password', with: @user.password
     find('input[name="commit"]').click
     expect(current_path).to eq(root_path)
+
+    #トップページに設定した目標があることを確認する
+    expect(page).to have_content(@goal.theme)
+    expect(page).to have_content(@goal.target_total_time)
+    expect(page).to have_content(@goal.purpose)
 
     #学習を開始のボタンがあることを確認する
     expect(page).to have_content('学習を開始')
@@ -34,6 +39,7 @@ RSpec.describe '学習記録の投稿', type: :system do
 
     #トップページに遷移することを確認する
     expect(current_path).to eq(goals_path)
+
     #トップページに学習記録があることを確認する
     expect(page).to have_content('メモ')
     #トップページに次回の学習予定があることを確認する
