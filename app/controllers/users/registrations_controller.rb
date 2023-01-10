@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+
+  def create
+    super
+    HabitMailer.send_when_signup(params[:user][:nickname], params[:user][:email]).deliver
+  end
+
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
