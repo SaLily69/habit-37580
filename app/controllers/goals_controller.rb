@@ -19,10 +19,11 @@ class GoalsController < ApplicationController
   def index
     if Goal.exists?(user_id: current_user.id) && user_signed_in?
       @goal = Goal.find_by(user_id: current_user.id)
-      @logs = Log.where(goal_id: @goal.id).order("created_at DESC")
+      @logs = Log.where(goal_id: @goal.id).order("study_day DESC")
       @log = Log.where(goal_id: @goal.id).last
       calc_time
-      
+      @achievment_rate = calc_achievment(@goal)
+      gon.graph_data = graph(@achievment_rate)
     end
   end
 
@@ -48,6 +49,7 @@ class GoalsController < ApplicationController
   end
 
   private
+
   def goal_params
     params.require(:goal).permit(:theme, :purpose, :target_total_time).merge(user_id: current_user.id)
   end
@@ -58,7 +60,7 @@ class GoalsController < ApplicationController
       @logs = Log.where(goal_id: @goal.id).order("created_at DESC")
       @log = Log.where(goal_id: @goal.id).last
       calc_time
-      calc_achievment
+      @achievment_rate = calc_achievment(@goal)
     else
       redirect_to root_path
     end
@@ -78,6 +80,32 @@ class GoalsController < ApplicationController
       @study_hour_total = study_hour_total
       @study_minute_total = study_minute_total
     end
+  end
+
+  def calc_achievment(rate)
+    if Log.exists?(goal_id: @goal.id)
+      study_hour = Log.where(goal_id: @goal.id).pluck(:study_hour)
+      study_minute = Log.where(goal_id: @goal.id).pluck(:study_minute)
+      study_hour_sum = study_hour.sum
+      study_minute = Log.where(goal_id: @goal.id).pluck(:study_minute)
+      study_minute_total = study_minute.sum
+      study_hour_total = study_hour_sum * 60 + study_minute_total
+    
+      goal_time = @goal.target_total_time
+      goal_time_sum = goal_time * 60 
+
+      achievment_rate = sprintf("%.2f",study_hour_total / goal_time_sum.to_f)
+      a, b = achievment_rate.to_s.split(".")
+      achievment_rate= b.to_i 
+    else
+      achievment_rate = 0
+    end
+  end
+
+  def graph(achievment_rate)
+    achievment_rate = @achievment_rate
+    time_required = 100 - achievment_rate
+    graph_data = [achievment_rate , time_required]
   end
 
 

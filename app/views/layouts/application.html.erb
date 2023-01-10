@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %>
+    <%= include_gon %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -21,14 +23,14 @@
                 <li class="nav-item">
                   <a class="nav-link" href="/"><span><%= current_user.nickname %>さん</a>
                 </li>
-                <li class="nav-item">
-                  <a><%= link_to "目標の設定", edit_goal_path(Goal.find_by(user_id: current_user.id)), class: "nav-link" %></a>
+                <li class="nav-item-button">
+                  <%= link_to "目標の設定", edit_goal_path(Goal.find_by(user_id: current_user.id)), class: "nav-link" %>
+                </li>
+                <li class="nav-item-button">
+                  <%= link_to "学習を開始", goal_logs_path(@goal), class: "nav-link" %>
                 </li>
                 <li class="nav-item">
-                  <a ><%= link_to "学習を開始", goal_logs_path(@goal), class: "nav-link" %></a>
-                </li>
-                <li class="nav-item">
-                  <a><%= link_to "ログアウト", destroy_user_session_path, class: "btn", method: :delete %></a>
+                  <%= link_to "ログアウト", destroy_user_session_path, class: "btn", method: :delete %>
                 </li>
               </ul>
           <% else %>
@@ -37,10 +39,10 @@
                   <a class="nav-link" href="#"><span><%= current_user.nickname %>さん</a>
                 </li>
                 <li class="nav-item">
-                  <a><%= link_to "目標の設定", new_goal_path, class: "nav-link" %></a>
+                  <%= link_to "目標の設定", new_goal_path, class: "nav-link" %>
                 </li>
                 <li class="nav-item">
-                  <a><%= link_to "ログアウト", destroy_user_session_path, class: "btn", method: :delete %></a>
+                  <%= link_to "ログアウト", destroy_user_session_path, class: "btn", method: :delete %>
                 </li>
               </ul>
           <% end %>
