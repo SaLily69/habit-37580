@@ -1,4 +1,6 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  default from: 'Habit配信メール',
+          bcc: ENV['HABIT_MAILER_ADDRESS'],
+          reply_to: ENV['HABIT_MAILER_ADDRESS']
   layout 'mailer'
 end
