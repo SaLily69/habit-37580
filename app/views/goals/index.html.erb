@@ -24,7 +24,7 @@
           <p><%= log.study_day %>：<%= log.study_hour %>時間<%= log.study_minute %>分
           <%= link_to '▷メモ', goal_log_path(@goal,log), class: "btn btn-outline-secondary" %></p>
         <% end %>
-        <%= link_to "学習記録を出力する", root_path(format: :csv)%>
+        <%= link_to "学習記録を出力する", root_path(format: :csv), class: 'out_csv'%>
       <% end %>
     <% end %>
 </div>
