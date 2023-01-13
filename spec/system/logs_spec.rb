@@ -52,6 +52,11 @@ RSpec.describe '学習記録の投稿', type: :system do
     expect(page).to have_content @total_minute
     #トップページに学習進捗率を示すグラフがあることを確認する
     #javascriptをテストするには別途gem(capybara-webkit)インストール必要
+
+    #「学習記録を出力する」の表示があることを確認する
+    expect(page).to have_content('学習記録を出力する')
+    #「学習記録を出力する」をクリックする
+    find('.out_csv', :text => '学習記録を出力する').click
     end
   end
 end

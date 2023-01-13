@@ -1,4 +1,5 @@
 class GoalsController < ApplicationController
+  require 'csv' 
   before_action :authenticate_user!
   #before_action :move_to_new
   before_action :set_goal, only:[:edit, :destroy]
@@ -24,6 +25,15 @@ class GoalsController < ApplicationController
       calc_time
       @achievment_rate = calc_achievment(@goal)
       gon.graph_data = graph(@achievment_rate)
+    end
+    if Log.exists?
+      @logs = Log.where(goal_id: @goal.id).order("study_day DESC")
+      respond_to do |format|
+        format.html
+        format.csv do |csv|
+          send_logs_csv(@logs)
+        end
+      end
     end
   end
 
@@ -106,6 +116,25 @@ class GoalsController < ApplicationController
     achievment_rate = @achievment_rate
     time_required = 100 - achievment_rate
     graph_data = [achievment_rate , time_required]
+  end
+
+  def send_logs_csv(logs)
+    csv_data = CSV.generate do |csv|
+      column_names = %w(学習日 学習時間（時間） 学習時間（分） メモ 自己評価)
+      csv << column_names
+
+      logs.each do |log|
+        column_values = [
+          log.study_day,
+          log.study_hour,
+          log.study_minute,
+          log.task,
+          log.feed_back
+        ]
+        csv << column_values
+      end
+    end
+    send_data(csv_data, filename: "学習記録一覧.csv")
   end
 
 
